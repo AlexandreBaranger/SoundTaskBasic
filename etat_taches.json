@@ -1,0 +1,128 @@
+{
+    "Room tone": {
+        "1. Recherche de son dans la bank": {
+            "etat": "Termin\u00e9",
+            "checkbox": true
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "En cours",
+            "checkbox": true
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "En cours",
+            "checkbox": false
+        }
+    },
+    "Wings idle": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    },
+    "Wings flap (medium + high)": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    },
+    "Footsteps on ground": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    },
+    "Body and arm movement whoosh": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    },
+    "Spell hand whoosh and impact": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    },
+    "Rotation whoosh + object whoosh for scythe": {
+        "1. Recherche de son dans la bank": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "2. Injecter les synth\u00e9tiseurs dans le projet Wwise": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "3. Synchroniser le d\u00e9clenchement d'event": {
+            "etat": "ToDo",
+            "checkbox": false
+        },
+        "4. Ajuster les CSV et mixer": {
+            "etat": "ToDo",
+            "checkbox": false
+        }
+    }
+}

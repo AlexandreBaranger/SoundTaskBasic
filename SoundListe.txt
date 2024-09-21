@@ -1,0 +1,7 @@
+Room tone
+Wings idle
+Wings flap (medium + high)
+Footsteps on ground
+Body and arm movement whoosh
+Spell hand whoosh and impact
+Rotation whoosh + object whoosh for scythe

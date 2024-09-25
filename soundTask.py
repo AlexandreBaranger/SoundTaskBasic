@@ -3,17 +3,27 @@ from tkinter import ttk
 from tkinter import filedialog, messagebox
 import json
 import os
+import time  # Ajout pour le contrôle du temps entre clics
 
 # Fichier de sauvegarde des états
 FICHIER_SAUVEGARDE = "etat_taches.json"
 
-# Fonction pour lire le fichier txt sélectionné via la boîte de dialogue
-def lire_fichier_txt():
-    filepath = filedialog.askopenfilename(
-        title="Choisissez un fichier .txt",
-        filetypes=[("Text files", "*.txt")],
-        defaultextension=".txt"
-    )
+# Fonction pour trouver un fichier .txt dans le répertoire actuel
+def trouver_fichier_txt():
+    fichiers_txt = [f for f in os.listdir() if f.endswith('.txt')]
+    if fichiers_txt:
+        return fichiers_txt[0]  # Retourne le premier fichier .txt trouvé
+    else:
+        return None
+
+# Fonction pour lire un fichier txt
+def lire_fichier_txt(filepath=None):
+    if filepath is None:  # Si aucun fichier n'est passé, ouvrir une boîte de dialogue
+        filepath = filedialog.askopenfilename(
+            title="Choisissez un fichier .txt",
+            filetypes=[("Text files", "*.txt")],
+            defaultextension=".txt"
+        )
     
     if filepath:
         with open(filepath, 'r') as f:
@@ -45,9 +55,13 @@ class TacheManagerApp:
         
         # Stocker l'état des tâches dans un dictionnaire
         self.etats = charger_etats()
+        self.last_click_time = 0  # Variable pour éviter les clics trop rapides
 
         # Configuration du style sombre pour la fenêtre principale
         self.root.configure(bg='#1e1e1e')
+
+        # Maximiser la fenêtre au lieu de la passer en plein écran
+        self.root.state('zoomed')
 
         # Créer un cadre pour la liste des tâches avec un canvas pour le scroll
         self.canvas = tk.Canvas(self.root, bg='#1e1e1e', highlightthickness=0)
@@ -67,11 +81,17 @@ class TacheManagerApp:
         self.canvas.pack(side="left", fill="both", expand=True)
         self.scrollbar.pack(side="right", fill="y")
 
-        # Charger les tâches à partir du fichier txt choisi par l'utilisateur
+        # Charger les tâches à partir du fichier txt
         self.charger_taches()
 
+
     def charger_taches(self):
-        taches_principales = lire_fichier_txt()
+        # Chercher un fichier txt dans le dossier, sinon demander à l'utilisateur
+        fichier_txt = trouver_fichier_txt()
+        if fichier_txt:
+            taches_principales = lire_fichier_txt(fichier_txt)
+        else:
+            taches_principales = lire_fichier_txt()  # Demander à l'utilisateur si aucun fichier trouvé
 
         if taches_principales:
             col_count = 3  # Nombre de colonnes
@@ -124,22 +144,42 @@ class TacheManagerApp:
         btn.bind("<Button-1>", lambda event: self.toggle_en_cours(btn, tache_principale, tache_secondaire))
 
     def toggle_en_cours(self, btn, tache_principale, tache_secondaire):
-        # Toggle l'état du bouton entre "ToDo", "En cours" et "Terminé"
-        current_state = self.etats[tache_principale][tache_secondaire]
-        etat_bouton = current_state["etat"]
+        # Vérifier si deux clics ont eu lieu trop rapidement (par exemple 0.5 seconde)
+        current_time = time.time()
+        if current_time - self.last_click_time < 0.5:  # Ajuster le temps si nécessaire
+            print("Clic ignoré car trop rapide")
+            return
+        self.last_click_time = current_time
 
+        # Récupérer l'état actuel de la tâche
+        current_state = self.etats[tache_principale][tache_secondaire]
+        etat_bouton = current_state.get("etat", "ToDo")  # Assurer que "ToDo" est l'état par défaut
+
+        # Afficher l'état actuel dans la console pour debug (optionnel)
+        print(f"État actuel : {etat_bouton}")
+
+        # Changer l'état selon l'ordre correct
         if etat_bouton == "ToDo":
+            # Passer de "ToDo" à "En cours"
             self.etats[tache_principale][tache_secondaire]["etat"] = "En cours"
             btn.config(text="En cours")
         elif etat_bouton == "En cours":
+            # Passer de "En cours" à "Terminé"
             self.etats[tache_principale][tache_secondaire]["etat"] = "Terminé"
             btn.config(text="Terminé")
-        else:
+        elif etat_bouton == "Terminé":
+            # Passer de "Terminé" à "ToDo"
             self.etats[tache_principale][tache_secondaire]["etat"] = "ToDo"
             btn.config(text="ToDo")
-        
+
+        # Mettre à jour le style du bouton en fonction du nouvel état
         self.update_button_style(btn, self.etats[tache_principale][tache_secondaire]["etat"])
+        
+        # Sauvegarder les états (optionnel)
         sauvegarder_etats(self.etats)
+
+        # Afficher le nouvel état dans la console pour debug (optionnel)
+        print(f"Nouvel état : {self.etats[tache_principale][tache_secondaire]['etat']}")
 
     def update_button_style(self, btn, etat):
         if etat == "En cours":
